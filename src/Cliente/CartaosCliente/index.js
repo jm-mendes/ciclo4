@@ -28,9 +28,30 @@ export const CartaosCliente = () => {
         .catch(()=>{
             setStatus({
                 type: 'error',
-                message: 'Erro: sem conexão com a API.'
+                message: 'Erro: sem conexão  com a API.'
             })
             console.log("Erro: sem conexão com a API.")})
+    }
+
+    const delCartao = async (idCartao) => {
+        console.log(idCartao)
+        const headers = {
+            'Content-type':  'application/json'
+        }
+
+        await axios.delete(api+"/excluircartao/"+idCartao,
+        {headers})
+        .then((response)=>{
+            console.log(response.data.type);
+            console.log(response.data.message);
+            getCart();
+        })
+        .catch(()=>{
+            setStatus({
+                type: 'error',
+                message: 'Erro: não foi possível conectar-se a API'
+            })
+        })
     }
 
     useEffect(()=>{
@@ -75,23 +96,24 @@ export const CartaosCliente = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(cartoes => (
+                        {data.map(card => (
 
-                            <tr key={cartoes.id}>
+                            <tr key={card.id}>
                                 <th scope="row">
-                                    {cartoes.id}
+                                    {card.id}
                                 </th>
                                 <td>
-                                    {cartoes.ClienteId}
+                                    {card.ClienteId}
                                 </td>
                                 <td>
-                                    {cartoes.dataCartao}
+                                    {card.dataCartao}
                                 </td>
                                 <td>
-                                    {cartoes.validade}
+                                    {card.validade}
                                 </td>
                                 <td>
-                                    <Link to ={"/editar-cartao/"+cartoes.id} className="btn btn-outline-warning btn-sm">Editar cartão</Link>
+                                    <Link to ={"/editar-cartao/"+card.id} className="btn btn-outline-warning btn-sm">Editar cartão</Link>
+                                    <span className="btn btn-outline-danger btn-sm" onClick={()=> delCartao(card.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}
