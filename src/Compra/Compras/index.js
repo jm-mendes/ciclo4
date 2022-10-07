@@ -123,6 +123,8 @@ export const Compras = () => {
                     </tbody>
                 </Table>
 
+                <p>{"Para inserir uma compra, navegar para Clientes > Consultar Cartões > Nova Compra"}</p>
+
             </Container>
         </div>
     )
