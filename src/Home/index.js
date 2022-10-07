@@ -16,6 +16,8 @@ export const Home = () => {
                         btn-outline-info btn-sm">Clientes</Link>
                         <Link to="/listar-empresas" className="m-auto btn
                         btn-outline-primary btn-sm">Empresas</Link>
+                        <Link to="/listar-compras" className="m-auto btn
+                        btn-outline-warning btn-sm">Compras</Link>
                     </div>
                 </div>
             </Container>

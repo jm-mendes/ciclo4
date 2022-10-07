@@ -4,20 +4,20 @@ import { Link } from "react-router-dom"
 import { Alert, Container, Table } from "reactstrap"
 import { api } from "../../config"
 
-export const Empresas = () => {
+export const Compras = () => {
     const [data, setData] = useState([])
     const [status, setStatus] = useState({
         type: '',
         message: ''
     })
 
-    const getEmpresas = async () => {
+    const getCompras = async () => {
         
-        await axios.get(api + "/empresas")
+        await axios.get(api + "/compras")
             .then((response) => {
-                console.log('recebendo empresas')
-                console.log(response.data.emp)
-                setData(response.data.emp)
+                console.log('recebendo compras')
+                console.log(response.data.comp)
+                setData(response.data.comp)
             })
             .catch(() => {
                 setStatus({
@@ -28,29 +28,31 @@ export const Empresas = () => {
             })
     };
 
-    const delEmpresa = async (idEmpresa) => {
-        console.log(idEmpresa)
-        const headers = {
-            'Content-type':  'application/json'
-        }
+     const delCompra = async (CartaoId, PromocaoId) => {
+         console.log(CartaoId)
+         console.log(PromocaoId)
 
-        await axios.delete(api+"/excluirempresa/"+idEmpresa,
-        {headers})
-        .then((response)=>{
-            console.log(response.data.type);
-            console.log(response.data.message);
-            getEmpresas();
-        })
-        .catch(()=>{
-            setStatus({
-                type: 'error',
-                message: 'Erro: não foi possível conectar-se a API'
-            })
-        })
-    }
+         const headers = {
+             'Content-type':  'application/json'
+         }
+
+         await axios.delete(api+"/cartao/"+CartaoId+"/promocao/"+PromocaoId,
+         {headers})
+         .then((response)=>{
+             console.log(response.data.type);
+             console.log(response.data.message);
+             getCompras();
+         })
+         .catch(()=>{
+             setStatus({
+                 type: 'error',
+                 message: 'Erro: não foi possível conectar-se a API'
+             })
+         })
+     }
 
     useEffect(() => {
-        getEmpresas();
+        getCompras();
     }, [])
 
     return (
@@ -64,11 +66,11 @@ export const Empresas = () => {
 
                 <div className="d-flex justify-content-between">
                     <div>
-                        <h1>Lista de Empresas</h1>
+                        <h1>Lista de Compras</h1>
                     </div>
 
                     <div className="p-2">
-                        <Link to="/empresa" className="btn btn-outline-info btn-sm">Inserir empresa</Link>
+                        <Link to="/" className="btn btn-outline-info btn-sm">Home</Link>
                     </div>
                 </div>
 
@@ -76,42 +78,45 @@ export const Empresas = () => {
                     <thead>
                         <tr>
                             <th>
-                                Id
+                                Id Cartão
                             </th>
                             <th>
-                                Nome
+                                Id Promoção
                             </th>
                             <th>
-                                Data de Adesão
+                                Data da Compra
                             </th>
                             <th>
-                                Data de Cadastro
+                                Quantidade
                             </th>
                             <th>
-                                Ações
+                                Valor
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(emp => (
+                        {data.map(comp => (
 
-                            <tr key={emp.id}>
+                            <tr key={comp.CartaoId}>
                                 <th scope="row">
-                                    {emp.id}
+                                    {comp.CartaoId}
                                 </th>
                                 <td>
-                                    {emp.nome}
+                                    {comp.PromocaoId}
                                 </td>
                                 <td>
-                                    {emp.dataAdesao}
+                                    {comp.data}
                                 </td>
                                 <td>
-                                    {emp.createdAt}
+                                    {comp.quantidade}
                                 </td>
                                 <td>
-                                    <Link to ={"/promocaos-empresa/"+emp.id} className="btn btn-outline-info btn-sm">Consultar Promoções</Link>
-                                    <Link to ={"/editar-empresa/"+emp.id} className="btn btn-outline-warning btn-sm">Editar</Link>
-                                    <span className="btn btn-outline-danger btn-sm" onClick={()=> delEmpresa(emp.id)}>Excluir</span>
+                                    {comp.valor}
+                                </td>
+
+                                <td>
+                                    <Link to ={"/editar-compra/cartao/"+comp.CartaoId+"/promocao/"+comp.PromocaoId} className="btn btn-outline-warning btn-sm">Editar Compra</Link>
+                                    <span className="btn btn-outline-danger btn-sm" onClick={()=> delCompra(comp.CartaoId, comp.PromocaoId)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

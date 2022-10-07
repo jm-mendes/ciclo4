@@ -122,7 +122,7 @@ export const Clientes = () => {
                                 </td>
                                 <td>
                                     <Link to ={"/cartaos-cliente/"+cli.id} className="btn btn-outline-info btn-sm">Consultar Cartões</Link>
-                                    <Link to ={"/editar-cliente/"+cli.id} className="btn btn-outline-info btn-sm">Editar Cliente</Link>
+                                    <Link to ={"/editar-cliente/"+cli.id} className="btn btn-outline-warning btn-sm">Editar Cliente</Link>
                                     <span className="btn btn-outline-danger btn-sm" onClick={()=> delCliente(cli.id)}>Excluir</span>
                                 </td>
                             </tr>

@@ -14,6 +14,10 @@ import { EditarEmpresa } from './Empresa/EditarEmpresa';
 import { PromocaosEmpresa } from './Empresa/PromocaosEmpresa';
 import { CadastrarPromocao } from './Empresa/CadastrarPromocao';
 import { EditarPromocao } from './Empresa/EditarPromocao';
+import { Compras } from './Compra/Compras';
+import { SelecionarPromocao } from './Compra/SelecionarPromocao';
+import { CadastrarCompra } from './Compra/CadastrarCompra';
+import { EditarCompra } from './Compra/EditarCompra';
 
 
 function App() {
@@ -40,6 +44,12 @@ function App() {
 
         <Route path = '/editar-empresa/:id' element={<EditarEmpresa/>} />
         <Route path = '/editar-promocao/:id' element={<EditarPromocao/>} />
+
+        <Route path = '/listar-compras' element={<Compras/>}/>
+
+        <Route path = '/cartao/:idcartao/promocao' element={<SelecionarPromocao/>}/>
+        <Route path = '/inserir-compra/cartao/:idcartao/promocao/:idpromocao' element={<CadastrarCompra/>}/>
+        <Route path = '/editar-compra/cartao/:idcartao/promocao/:idpromocao' element={<EditarCompra/>}/>
 
       </Routes>
     </div>

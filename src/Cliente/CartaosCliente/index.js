@@ -6,59 +6,60 @@ import { Container } from "reactstrap"
 import { api } from "../../config"
 
 export const CartaosCliente = () => {
-    const params=useParams()
+    const params = useParams()
 
     const [status, setStatus] = useState({
         type: '',
         message: ''
     })
 
-    const [data,setData] = useState([])
-    
+    const [data, setData] = useState([])
+
     const [id] = useState(params.id)
 
     const getCart = async () => {
 
-        await axios.get(api+"/cliente/"+id+"/cartoes")
-        .then((response)=>{
-            console.log('recebendo cartoes')
-            console.log(response.data.cartoes)
-            setData(response.data.cartoes)
-        })
-        .catch(()=>{
-            setStatus({
-                type: 'error',
-                message: 'Erro: sem conexão  com a API.'
+        await axios.get(api + "/cliente/" + id + "/cartoes")
+            .then((response) => {
+                console.log('recebendo cartoes')
+                console.log(response.data.cartoes)
+                setData(response.data.cartoes)
             })
-            console.log("Erro: sem conexão com a API.")})
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: sem conexão  com a API.'
+                })
+                console.log("Erro: sem conexão com a API.")
+            })
     }
 
     const delCartao = async (idCartao) => {
         console.log(idCartao)
         const headers = {
-            'Content-type':  'application/json'
+            'Content-type': 'application/json'
         }
 
-        await axios.delete(api+"/excluircartao/"+idCartao,
-        {headers})
-        .then((response)=>{
-            console.log(response.data.type);
-            console.log(response.data.message);
-            getCart();
-        })
-        .catch(()=>{
-            setStatus({
-                type: 'error',
-                message: 'Erro: não foi possível conectar-se a API'
+        await axios.delete(api + "/excluircartao/" + idCartao,
+            { headers })
+            .then((response) => {
+                console.log(response.data.type);
+                console.log(response.data.message);
+                getCart();
             })
-        })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: não foi possível conectar-se a API'
+                })
+            })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getCart()
-    },[id])
+    }, [id])
 
-    return(
+    return (
         <div>
             <Container>
                 <div className="d-flex">
@@ -70,7 +71,7 @@ export const CartaosCliente = () => {
                     <div className="p-2">
                         <Link to="/listar-clientes" className="m-auto btn
                         btn-outline-info btn-sm">Clientes</Link>
-                        <Link to={"/cartao/"+id} className="m-auto btn
+                        <Link to={"/cartao/" + id} className="m-auto btn
                         btn-outline-info btn-sm">Inserir Cartão</Link>
                     </div>
                 </div>
@@ -112,8 +113,9 @@ export const CartaosCliente = () => {
                                     {card.validade}
                                 </td>
                                 <td>
-                                    <Link to ={"/editar-cartao/"+card.id} className="btn btn-outline-warning btn-sm">Editar cartão</Link>
-                                    <span className="btn btn-outline-danger btn-sm" onClick={()=> delCartao(card.id)}>Excluir</span>
+                                    <Link to={"/cartao/" + card.id + "/promocao/"} className="btn btn-outline-success btn-sm">Nova compra</Link>
+                                    <Link to={"/editar-cartao/" + card.id} className="btn btn-outline-warning btn-sm">Editar cartão</Link>
+                                    <span className="btn btn-outline-danger btn-sm" onClick={() => delCartao(card.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}
