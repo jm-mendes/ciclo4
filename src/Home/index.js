@@ -5,10 +5,10 @@ export const Home = () => {
     return (
         <div>
             <Container>
-                <div className="m-auto d-flex">
-                    <div className="m-auto p-2">
+                <div className="d-flex justify-content-between">
+                    <div>
                         <h1>
-                            Página Inicial
+                            Home
                         </h1>
                     </div>
                     <div className="p-2">

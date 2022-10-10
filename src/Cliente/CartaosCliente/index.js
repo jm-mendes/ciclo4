@@ -62,8 +62,8 @@ export const CartaosCliente = () => {
     return (
         <div>
             <Container>
-                <div className="d-flex">
-                    <div className="m-auto p-2">
+                <div className="d-flex justify-content-between">
+                    <div className="p-2">
                         <h1>
                             Cartões do Cliente
                         </h1>

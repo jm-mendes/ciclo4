@@ -1,5 +1,10 @@
 # Getting Started with Create React App
 
+Challenge: Front-end using React.JS.
+
+Please, use the API to check the back-end with Node.JS: 
+https://github.com/jm-mendes/TI-ACADEMY-DESAFIO-NODEJS
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
