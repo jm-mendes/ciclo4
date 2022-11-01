@@ -1,8 +1,11 @@
 # Getting Started with Create React App
 
 Challenge: Front-end using React.JS.
+Would you like to see a live-demo?
+Check it: 
+https://euphonious-meringue-b29ae9.netlify.app/
 
-Please, use the API to check the back-end with Node.JS: 
+Give a look at the Back-end API:
 https://github.com/jm-mendes/TI-ACADEMY-DESAFIO-NODEJS
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
